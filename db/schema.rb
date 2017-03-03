@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 20170303191242) do
   enable_extension "plpgsql"
 
   create_table "cards", force: :cascade do |t|
-    t.string   "body"
     t.integer  "list_id"
+    t.string   "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["list_id"], name: "index_cards_on_list_id", using: :btree
