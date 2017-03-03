@@ -3,12 +3,18 @@
   <head>
     <title>Tremello</title>
     <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-  </head>
+  <% if Rails.env.development? %>
+  <script src="http://localhost:3808/webpack-dev-server.js"></script>
+<% end %>
+</head>
 
   <body>
     <%= yield %>
-  </body>
+  <%= javascript_include_tag *webpack_asset_paths('application') %>
+</body>
 </html>
