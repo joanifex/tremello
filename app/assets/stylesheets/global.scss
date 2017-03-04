@@ -31,3 +31,14 @@
 .card .card-content {
   padding: 10px;
 }
+
+#add-list {
+  margin: 0;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+#add-list:focus {
+  border-bottom: none;
+  box-shadow: none;
+}

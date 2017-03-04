@@ -1,5 +1,6 @@
 import React from 'react';
-import List from './List'
+import List from './List';
+import ListForm from './ListForm';
 
 class Board extends React.Component {
   state = { lists: [] }
@@ -11,6 +12,19 @@ class Board extends React.Component {
       dataType: 'JSON'
     }).done( lists => {
       this.setState({ lists });
+    }).fail( data => {
+      console.log(data);
+    });
+  }
+
+  addList = (title) => {
+    $.ajax({
+      url: 'api/lists',
+      type: 'POST',
+      dataType: 'JSON',
+      data: { list: {title}}
+    }).done( list => {
+      this.setState({ lists: [...this.state.lists, list]})
     }).fail( data => {
       console.log(data);
     });
@@ -28,6 +42,7 @@ class Board extends React.Component {
     return(
       <div className="board">
         { this.displayLists() }
+        <ListForm addList={this.addList} />
       </div>
     );
   }
