@@ -4,8 +4,12 @@ class Card extends React.Component {
 
   render() {
     return(
-      <div>
-        {this.props.card.body}
+      <div className="card-wrapper">
+        <div className="card">
+          <div className="card-content">
+            {this.props.card.body}
+          </div>
+        </div>
       </div>
     )
   }

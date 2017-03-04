@@ -26,8 +26,8 @@ class List extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.props.list.title}
+      <div className="list-wrapper grey lighten-2">
+        <span>{this.props.list.title}</span>
         { this.displayCards() }
       </div>
     );
