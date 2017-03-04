@@ -30,10 +30,29 @@ class Board extends React.Component {
     });
   }
 
+  destroyList = (id) => {
+    $.ajax({
+      url: `api/lists/${id}`,
+      type: 'DELETE'
+    }).done( data => {
+      debugger
+      this.setState({ lists: this.state.lists.filter( list => {
+        return list.id !== id;
+        })
+      });
+    }).fail( data => {
+      console.log(data);
+    });
+  }
+
   displayLists = () => {
     return this.state.lists.map( list => {
         return (
-          <List key={list.id} list={list}/>
+          <List
+            key={list.id}
+            list={list}
+            destroyList={this.destroyList}
+          />
         )
       });
   }

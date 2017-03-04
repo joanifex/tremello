@@ -28,6 +28,12 @@ class List extends React.Component {
     return (
       <div className="list-wrapper grey lighten-2">
         <span>{this.props.list.title}</span>
+        <a
+          onClick={ () => {this.props.destroyList(this.props.list.id)} }
+          href="#"
+        >
+          <i className="material-icons right">clear</i>
+        </a>
         { this.displayCards() }
       </div>
     );
