@@ -1,11 +1,13 @@
 import React from 'react';
+import NavBar from '../components/NavBar'
 
 const App = ({ children }) => (
   <div>
-    Hello World
-    { children }
+    <NavBar />
+    <div className="container">
+      { children }
+    </div>
   </div>
 )
 
 export default App;
-
