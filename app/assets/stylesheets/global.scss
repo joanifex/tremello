@@ -1,0 +1,33 @@
+.canvas {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.board {
+  overflow: auto;
+  white-space: nowrap;
+  height: 100%;
+  margin: 20px 20px;
+}
+
+.list-wrapper {
+  width: 270px;
+  margin: 0 10px;
+  padding: 8px;
+  display: inline-block;
+  vertical-align: top;
+  white-space: normal;
+  border-radius: 5px;
+}
+
+.card-wrapper {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.card .card-content {
+  padding: 10px;
+}

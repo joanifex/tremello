@@ -2,11 +2,9 @@ import React from 'react';
 import NavBar from '../components/NavBar'
 
 const App = ({ children }) => (
-  <div>
+  <div className="canvas">
     <NavBar />
-    <div className="container">
-      { children }
-    </div>
+    { children }
   </div>
 )
 
