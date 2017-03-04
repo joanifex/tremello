@@ -32,13 +32,26 @@
   padding: 10px;
 }
 
-#add-list {
-  margin: 0;
-  border-bottom: none;
-  box-shadow: none;
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: black;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: black;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: black;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: black;
 }
 
-#add-list:focus {
-  border-bottom: none;
-  box-shadow: none;
+.list-form {
+  margin: 0 !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+.list-form:focus {
+  border-bottom: none !important;
+  box-shadow: none !important;
 }

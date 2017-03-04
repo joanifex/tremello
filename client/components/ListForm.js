@@ -14,9 +14,9 @@ class ListForm extends React.Component {
       <form
         ref="form"
         onSubmit={this.save}
-        className="list-wrapper blue-grey white-text"
+        className="list-wrapper grey lighten-2"
       >
-        <input ref="input" id="add-list" placeholder="Add a list..."/>
+        <input ref="input" placeholder="Add a list..."/>
         <button type="submit" className="btn green">Save</button>
       </form>
     );

@@ -30,6 +30,22 @@ class Board extends React.Component {
     });
   }
 
+  updateList = (updatedList) => {
+    $.ajax({
+      url: `/api/lists/${updatedList.id}`,
+      type: 'PUT',
+      dataType: 'JSON',
+      data: { list: { title: updatedList.title }}
+    }).done( updatedList => {
+      let lists = this.state.lists.map( list => {
+        return list.id === updatedList.id ? updatedList : list;
+      });
+      this.setState({ lists });
+    }).fail( data => {
+      console.log(data);
+    });
+  }
+
   destroyList = (id) => {
     $.ajax({
       url: `api/lists/${id}`,
@@ -51,6 +67,7 @@ class Board extends React.Component {
           <List
             key={list.id}
             list={list}
+            updateList={this.updateList}
             destroyList={this.destroyList}
           />
         )

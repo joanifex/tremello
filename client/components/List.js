@@ -16,6 +16,16 @@ class List extends React.Component {
     });
   }
 
+  handleKeyPress = (e) => {
+    if (e.key === 'Enter'){
+      this.props.updateList({
+        id: this.props.list.id,
+        title: this.refs.input.value
+      });
+      this.refs.input.blur();
+    }
+  }
+
   displayCards = () => {
     return this.state.cards.map( card => {
       return(
@@ -27,13 +37,19 @@ class List extends React.Component {
   render() {
     return (
       <div className="list-wrapper grey lighten-2">
-        <span>{this.props.list.title}</span>
-        <a
-          onClick={ () => {this.props.destroyList(this.props.list.id)} }
-          href="#"
-        >
-          <i className="material-icons right">clear</i>
-        </a>
+        <div className="row">
+          <input
+            ref="input"
+            onKeyPress={this.handleKeyPress}
+            defaultValue={this.props.list.title}
+          />
+          <a
+            onClick={ () => {this.props.destroyList(this.props.list.id)} }
+            href="#"
+          >
+            <i className="material-icons right">clear</i>
+          </a>
+        </div>
         { this.displayCards() }
       </div>
     );
