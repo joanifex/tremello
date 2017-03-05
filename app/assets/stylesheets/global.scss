@@ -1,0 +1,76 @@
+.canvas {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.board {
+  overflow: auto;
+  white-space: nowrap;
+  height: 100%;
+  margin: 20px 20px;
+}
+
+.list-wrapper {
+  width: 270px;
+  margin: 0 10px;
+  padding: 8px;
+  display: inline-block;
+  vertical-align: top;
+  white-space: normal;
+  border-radius: 5px;
+}
+
+.card-wrapper {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.card .card-content {
+  padding: 5px 8px;
+}
+
+.input-with-icon {
+  width: 90% !important;
+}
+
+textarea.materialize-textarea {
+  padding: 0;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: black;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: black;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: black;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: black;
+}
+
+.list-form {
+  margin: 0 !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+.list-form:focus {
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+textarea.materialize-textarea {
+  min-height: 0;
+  overflow: hidden;
+  word-wrap: break-word;
+  resize: none;
+}
+
+.hidden {
+  display: none;
+}
