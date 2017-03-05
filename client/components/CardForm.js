@@ -1,6 +1,7 @@
 import React from 'react'
 
 class CardForm extends React.Component {
+  state = { expand: false }
 
   save = (e) => {
     e.preventDefault();
@@ -9,14 +10,29 @@ class CardForm extends React.Component {
     this.refs.input.focus();
   }
 
+  toggleExpand = (e) => {
+    setTimeout( () =>{$(this.refs.button).toggle()}, 100);
+  }
+
   render() {
     return(
       <div className="card-wrapper">
         <div className="card">
           <div className="card-content">
             <form ref="form" onSubmit={this.save}>
-              <input ref="input" placeholder="Add a card..." />
-              <button type="submit" className="btn green">Save</button>
+              <input
+                ref="input"
+                onFocus={this.toggleExpand}
+                onBlur={this.toggleExpand}
+                placeholder="Add a card..."
+              />
+              <button
+                ref="button"
+                type="submit"
+                className="btn green hidden"
+              >
+                Save
+              </button>
             </form>
           </div>
         </div>

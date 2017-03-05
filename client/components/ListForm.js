@@ -9,15 +9,30 @@ class ListForm extends React.Component {
     this.refs.input.focus();
   }
 
+  toggleExpand = (e) => {
+    setTimeout( () =>{$(this.refs.button).toggle()}, 100);
+  }
+
   render() {
     return(
       <form
         ref="form"
-        onSubmit={this.save}
+        onSubmitCapture={this.save}
         className="list-wrapper grey lighten-2"
       >
-        <input ref="input" placeholder="Add a list..."/>
-        <button type="submit" className="btn green">Save</button>
+        <input
+          ref="input"
+          onFocus={this.toggleExpand}
+          onBlur={this.toggleExpand}
+          placeholder="Add a list..."
+        />
+        <button
+          ref="button"
+          type="submit"
+          className="btn green hidden"
+        >
+          Save
+        </button>
       </form>
     );
   }
