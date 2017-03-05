@@ -8,13 +8,13 @@ RSpec.describe Api::ListsController, type: :controller do
     expect(response).to have_http_status(:success)
   end
 
-  describe 'POST #create' do
-   it 'sets the list instance variable' do
-     @list = 'list'
-     list_params = {list: title}
-     post :create, list_params
-     expect(assigns(:list)).to_not eq(nil)
-   end
- end
-end
+      describe 'POST #create' do
+       it 'sets the list instance variable' do
+         @list = 'list'
+         list_params = {list: title}
+         post :create, list_params
+         expect(assigns(:list)).to_not eq(nil)
+       end
+     end
+  end
 end
