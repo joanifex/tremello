@@ -55,3 +55,10 @@
   border-bottom: none !important;
   box-shadow: none !important;
 }
+
+textarea.materialize-textarea {
+  min-height: 0;
+  overflow: hidden;
+  word-wrap: break-word;
+  resize: none;
+}

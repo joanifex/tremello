@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from './Card'
+import CardForm from './CardForm'
 
 class List extends React.Component {
   state = { cards: [] }
@@ -26,10 +27,53 @@ class List extends React.Component {
     }
   }
 
+  addCard = (body) => {
+    $.ajax({
+      url: `/api/lists/${this.props.list.id}/cards`,
+      type: 'POST',
+      dataType: 'JSON',
+      data: { card: {body} }
+    }).done( card => {
+      this.setState({ cards: [...this.state.cards, card]});
+    }).fail( data => {
+      console.log(data);
+    });
+  }
+
+  updateCard = (card) => {
+    $.ajax({}).done( updatedCard => {
+      let cards = this.state.cards.map( card => {
+        return card.id === updatedCard.id ? updatedCard : card;
+      });
+      this.setState({ cards });
+    }).fail( data => {
+      console.log(data);
+    });
+  }
+
+  destroyCard = (id) => {
+    $.ajax({
+      url: `/api/lists/${this.props.list.id}/cards/${id}`,
+      type: 'DELETE',
+    }).done( data => {
+      this.setState({ cards: this.state.cards.filter( card => {
+        return card.id !== id;
+        })
+      });
+    }).fail( data => {
+      console.log(data);
+    });
+  }
+
   displayCards = () => {
     return this.state.cards.map( card => {
       return(
-        <Card key={card.id} card={card} />
+        <Card
+          key={card.id}
+          card={card}
+          updateCard={this.updateCard}
+          destroyCard={this.destroyCard}
+        />
       );
     });
   }
@@ -51,6 +95,7 @@ class List extends React.Component {
           </a>
         </div>
         { this.displayCards() }
+        <CardForm addCard={this.addCard} />
       </div>
     );
   }

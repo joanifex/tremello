@@ -51,7 +51,6 @@ class Board extends React.Component {
       url: `api/lists/${id}`,
       type: 'DELETE'
     }).done( data => {
-      debugger
       this.setState({ lists: this.state.lists.filter( list => {
         return list.id !== id;
         })
