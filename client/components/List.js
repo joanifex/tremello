@@ -15,6 +15,18 @@ class List extends React.Component {
     }).fail( data => {
       console.log(data);
     });
+
+    $(this.refs.dropdownButton).dropdown({
+         inDuration: 300,
+         outDuration: 225,
+         constrainWidth: false,
+         hover:true,
+         gutter: 0,
+         belowOrigin: false,
+         alignment: 'right',
+         stopPropagation: false
+       }
+     );
   }
 
   handleKeyPress = (e) => {
@@ -80,22 +92,45 @@ class List extends React.Component {
 
   render() {
     return (
-      <div className="list-wrapper grey lighten-2">
+      <div
+        className="list-wrapper grey lighten-2"
+      >
         <div className="row">
+          <a
+            ref="dropdownButton"
+            className='dropdown-button right'
+            href='#'
+            data-activates={`list-dropdown-${this.props.list.id}`}
+          >
+            <i className="material-icons">more_horiz</i>
+          </a>
+          <ul id={`list-dropdown-${this.props.list.id}`} className='dropdown-content'>
+            <li>
+              <a
+                onClick={ () => {this.props.destroyList(this.props.list.id)} }
+                href="#"
+                ref="button"
+              >
+                Complete List
+              </a>
+            </li>
+          </ul>
           <input
             ref="input"
-            onKeyPress={this.handleKeyPress}
+            className="input-with-icon"
             defaultValue={this.props.list.title}
+            onKeyPress={this.handleKeyPress}
           />
-          <a
-            onClick={ () => {this.props.destroyList(this.props.list.id)} }
-            href="#"
-          >
-            <i className="material-icons right">clear</i>
-          </a>
         </div>
         { this.displayCards() }
         <CardForm addCard={this.addCard} />
+        <button
+          onClick={ () => {this.props.destroyList(this.props.list.id)} }
+          href="#"
+          ref="button"
+          className="hidden btn red right"
+        > Archive List
+        </button>
       </div>
     );
   }

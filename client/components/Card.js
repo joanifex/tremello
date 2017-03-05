@@ -2,6 +2,20 @@ import React from 'react'
 
 class Card extends React.Component {
 
+  componentDidMount = () => {
+    $(this.refs.dropdownButton).dropdown({
+         inDuration: 300,
+         outDuration: 225,
+         constrainWidth: false,
+         hover: true,
+         gutter: 0,
+         belowOrigin: false,
+         alignment: 'right',
+         stopPropagation: false
+       }
+     );
+  }
+
   handleKeyPress = (e) => {
     if (e.key === 'Enter'){
       this.props.updateCard({
@@ -12,11 +26,37 @@ class Card extends React.Component {
     }
   }
 
+  toggleButton = () => {
+    $(this.refs.button).toggle();
+  }
+
   render() {
     return(
-      <div className="card-wrapper">
+      <div
+        className="card-wrapper"
+        onMouseEnter={this.toggleButton}
+        onMouseLeave={this.toggleButton}
+      >
         <div className="card">
           <div className="card-content">
+            <a
+              ref="dropdownButton"
+              className='dropdown-button right'
+              href='#'
+              data-activates={`card-dropdown-${this.props.card.id}`}
+            >
+              <i className="material-icons">more_horiz</i>
+            </a>
+            <ul id={`card-dropdown-${this.props.card.id}`} className='dropdown-content'>
+              <li>
+                <a
+                  onClick={ () => {this.props.destroyCard(this.props.card.id)} }
+                  href="#"
+                >
+                  Complete Card
+                </a>
+              </li>
+            </ul>
             <div className="input-field">
               <textarea
                 ref="input"
@@ -26,12 +66,6 @@ class Card extends React.Component {
               >
               </textarea>
             </div>
-            <a
-              onClick={ () => {this.props.destroyCard(this.props.card.id)} }
-              href="#"
-            >
-              <i className="material-icons">clear</i>
-            </a>
           </div>
         </div>
       </div>

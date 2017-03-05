@@ -9,6 +9,10 @@ class ListForm extends React.Component {
     this.refs.input.focus();
   }
 
+  onBlur = () => {
+    this.refs.form.reset();
+  }
+
   toggleExpand = (e) => {
     setTimeout( () =>{$(this.refs.button).toggle()}, 100);
   }
@@ -19,6 +23,7 @@ class ListForm extends React.Component {
         ref="form"
         onSubmitCapture={this.save}
         className="list-wrapper grey lighten-2"
+        onBlur={this.onBlur}
       >
         <input
           ref="input"

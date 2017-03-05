@@ -10,6 +10,10 @@ class CardForm extends React.Component {
     this.refs.input.focus();
   }
 
+  onBlur = () => {
+    this.refs.form.reset();
+  }
+
   toggleExpand = (e) => {
     setTimeout( () =>{$(this.refs.button).toggle()}, 100);
   }
@@ -19,7 +23,7 @@ class CardForm extends React.Component {
       <div className="card-wrapper">
         <div className="card">
           <div className="card-content">
-            <form ref="form" onSubmit={this.save}>
+            <form ref="form" onSubmit={this.save} onBlur={this.onBlur}>
               <input
                 ref="input"
                 onFocus={this.toggleExpand}
