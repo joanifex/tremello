@@ -13,8 +13,8 @@ RSpec.describe Api::ListsController, type: :controller do
          @list = 'list'
          list_params = {list: title}
          post :create, list_params
-         expect(assigns(:list)).to_not eq(nil)
+         expect(:list).to_not eq(nil)
        end
      end
-  end
+   end
 end
