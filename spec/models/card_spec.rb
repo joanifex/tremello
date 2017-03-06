@@ -8,4 +8,8 @@ RSpec.describe Card, type: :model do
       expect(card.body).to eq(body)
     end
   end
+
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:body)}
+  end
 end
