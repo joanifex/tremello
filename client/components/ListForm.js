@@ -34,7 +34,7 @@ class ListForm extends React.Component {
         <button
           ref="button"
           type="submit"
-          className="btn green hidden"
+          className="waves-effect waves-light btn blue-grey hidden"
         >
           Save
         </button>

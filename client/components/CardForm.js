@@ -33,7 +33,7 @@ class CardForm extends React.Component {
               <button
                 ref="button"
                 type="submit"
-                className="btn green hidden"
+                className="waves-effect wave-light btn blue-grey hidden"
               >
                 Save
               </button>
