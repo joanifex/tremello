@@ -14,7 +14,8 @@ class CardForm extends React.Component {
     this.refs.form.reset();
   }
 
-  toggleExpand = (e) => {
+  // TODO: fix save button event order
+  toggleExpand = () => {
     setTimeout( () =>{$(this.refs.button).toggle()}, 100);
   }
 

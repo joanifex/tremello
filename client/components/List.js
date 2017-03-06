@@ -93,7 +93,7 @@ class List extends React.Component {
   render() {
     return (
       <div
-        className="list-wrapper blue-grey lighten-2"
+        className="list-wrapper blue-grey lighten-4"
       >
         <div className="row">
           <a
