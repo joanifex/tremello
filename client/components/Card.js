@@ -53,7 +53,7 @@ class Card extends React.Component {
                   onClick={ () => {this.props.destroyCard(this.props.card.id)} }
                   href="#"
                 >
-                  <span ClassName="blue-grey-text-lighten-4">Complete Card</span>
+                  <span className="blue-grey-text-lighten-4">Complete Card</span>
                 </a>
               </li>
             </ul>
