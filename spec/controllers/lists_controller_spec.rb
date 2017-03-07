@@ -4,18 +4,18 @@ RSpec.describe Api::ListsController, type: :controller do
   let(:list) { FactoryGirl.create(:list) }
 
   describe "GET #index" do
+    it "returns http success" do
+      get :index
+      expect(response).to have_http_status(:success)
+    end
+
     it "returns JSON of all lists" do
       FactoryGirl.create(:list)
       FactoryGirl.create(:list, title: "title2")
       get :index
       parsed = JSON.parse(response.body)
-      expect(parsed.length).to eq(2)
+      expect(parsed.size).to eq(2)
       expect(parsed.first['title']).to eq(List.first.title)
-    end
-
-    it "returns http success" do
-      get :index
-      expect(response).to have_http_status(:success)
     end
   end
 
@@ -64,7 +64,7 @@ RSpec.describe Api::ListsController, type: :controller do
 
       it 'sets the list instance variable' do
         put :update, params: @params
-        expect(assigns(:list).id).to eq(@list.id)
+        expect(assigns(:list)).to eq(@list)
       end
 
       it "returns http success" do

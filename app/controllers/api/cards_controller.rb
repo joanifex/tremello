@@ -1,6 +1,6 @@
 class Api::CardsController < ApplicationController
   before_action :set_list
-  before_action :set_card, only: [:updade, :destroy]
+  before_action :set_card, only: [:update, :destroy]
 
   def index
     render json: @list.cards
