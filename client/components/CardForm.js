@@ -10,13 +10,15 @@ class CardForm extends React.Component {
     this.refs.input.focus();
   }
 
-  onBlur = () => {
-    this.refs.form.reset();
-  }
-
-  // TODO: fix save button event order
-  toggleExpand = () => {
-    setTimeout( () =>{$(this.refs.button).toggle()}, 100);
+  toggleExpand = (e) => {
+    setTimeout( () =>{
+      if($(this.refs.button).attr(':visible')) {
+        $(this.refs.button).hide();
+      } else {
+        $(this.refs.button).show();
+      }
+      this.refs.form.reset();
+    }, 200);
   }
 
   render() {
@@ -24,7 +26,7 @@ class CardForm extends React.Component {
       <div className="card-wrapper">
         <div className="card">
           <div className="card-content">
-            <form ref="form" onSubmit={this.save} onBlur={this.onBlur}>
+            <form ref="form" onSubmit={this.save}>
               <input
                 ref="input"
                 onFocus={this.toggleExpand}
