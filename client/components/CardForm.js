@@ -32,6 +32,7 @@ class CardForm extends React.Component {
                 onFocus={this.toggleExpand}
                 onBlur={this.toggleExpand}
                 placeholder="Add a card..."
+                required
               />
               <button
                 ref="button"
