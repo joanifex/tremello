@@ -2,14 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Card, type: :model do
   describe 'attributes' do
-    it 'has a body' do
-      body = 'body'
-      card = Card.create(body: body)
-      expect(card.body).to eq(body)
-    end
+    it { should respond_to(:body) }
   end
 
   describe 'validations' do
-    it { is_expected.to validate_presence_of(:body)}
+    it { should validate_presence_of(:body)}
   end
 end

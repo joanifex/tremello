@@ -1,5 +1,4 @@
 require 'rails_helper'
-before_action List.create(title: "title")
 
 RSpec.describe Api::CardsController, type: :controller do
 

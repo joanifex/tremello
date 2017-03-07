@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Api::ListsController, type: :controller do
+  let(:list) { FactoryGirl.create(:list) }
 
   describe "GET #index" do
     it "returns JSON of all lists" do
-      List.create(title: 'title')
-      List.create(title: 'title 2')
+      FactoryGirl.create(:list)
+      FactoryGirl.create(:list, title: "title2")
       get :index
       parsed = JSON.parse(response.body)
       expect(parsed.length).to eq(2)
@@ -19,91 +20,102 @@ RSpec.describe Api::ListsController, type: :controller do
   end
 
   describe 'POST #create' do
-    it "returns http success" do
-      list_params = {list: {title: "title"} }
-      post :create, list_params
-      expect(response).to have_http_status(:success)
+    describe 'success' do
+      before(:each) do
+        @list_params = {list: {title: "title"} }
+      end
+
+      it "returns http success" do
+        post :create, params: @list_params
+        expect(response).to have_http_status(:success)
+      end
+
+      it "returns JSON of created list" do
+        post :create, params: @list_params
+        parsed = JSON.parse(response.body)
+        expect(parsed["title"]).to eq(List.first.title)
+      end
     end
 
-    it "returns JSON of created list" do
-      list_params = {list: {title: "title"} }
-      post :create, list_params
-      parsed = JSON.parse(response.body)
-      expect(parsed["title"]).to eq(List.first.title)
-    end
+    describe 'fails' do
+      before(:each) do
+        @list_params = {list: {title: " "} }
+      end
 
-    it "returns JSON of errors when create fails" do
-      list_params = {list: {title: " "} }
-      post :create, list_params
-      parsed = JSON.parse(response.body)
-      expect(parsed["errors"]["title"].first).to eq("can't be blank")
-    end
+      it "returns errors JSON" do
+        post :create, params: @list_params
+        parsed = JSON.parse(response.body)
+        expect(parsed["errors"]["title"].first).to eq("can't be blank")
+      end
 
-    it "returns status 401 when create fails" do
-      list_params = {list: {title: " "} }
-      post :create, list_params
-      expect(response).to have_http_status(401)
+      it "returns status 401 when create fails" do
+        post :create, params: @list_params
+        expect(response).to have_http_status(401)
+      end
     end
   end
 
   describe 'PUT #update' do
-    it 'sets the list instance variable' do
-      list = List.create(title: "title")
-      params = {id: list.id, list: {title: "updated title"}}
-      put :update, params
-      expect(assigns(:list).id).to eq(list.id)
+    describe 'succeeds' do
+      before(:each) do
+        @list = List.create(title: "title")
+        @params = {id: @list.id, list: {title: "updated title"}}
+      end
+
+      it 'sets the list instance variable' do
+        put :update, params: @params
+        expect(assigns(:list).id).to eq(@list.id)
+      end
+
+      it "returns http success" do
+        put :update, params: @params
+        expect(response).to have_http_status(:success)
+      end
+
+      it "updates list" do
+        put :update, params: @params
+        expect(List.first.title).to eq("updated title")
+      end
+
+      it "returns JSON of updated list" do
+        put :update, params: @params
+        parsed = JSON.parse(response.body)
+        expect(parsed["title"]).to eq(List.first.title)
+      end
     end
 
-    it "returns http success" do
-      List.create(title: "title")
-      params = {id: List.first.id, list: {title: "updated title"}}
-      put :update, params
-      expect(response).to have_http_status(:success)
-    end
+    describe 'fails' do
+      before(:each) do
+        @list = List.create(title: "title")
+        @params = {id: List.first.id, list: {title: " "}}
+      end
 
-    it "updates list" do
-      List.create(title: "title")
-      params = {id: List.first.id, list: {title: "updated title"}}
-      put :update, params
-      expect(List.first.title).to eq("updated title")
-    end
+      it "returns JSON of errors when create fails" do
+        put :update, params: @params
+        parsed = JSON.parse(response.body)
+        expect(parsed["errors"]["title"].first).to eq("can't be blank")
+      end
 
-    it "returns JSON of updated list" do
-      List.create(title: "title")
-      params = {id: List.first.id, list: {title: "updated title"}}
-      put :update, params
-      parsed = JSON.parse(response.body)
-      expect(parsed["title"]).to eq(List.first.title)
-    end
-
-    it "returns JSON of errors when create fails" do
-      List.create(title: "title")
-      params = {id: List.first.id, list: {title: " "}}
-      put :update, params
-      parsed = JSON.parse(response.body)
-      expect(parsed["errors"]["title"].first).to eq("can't be blank")
-    end
-
-    it "returns status 401 when create fails" do
-      List.create(title: "title")
-      params = {id: List.first.id, list: {title: " "}}
-      put :update, params
-      expect(response).to have_http_status(401)
+      it "returns status 401 when create fails" do
+        put :update, params: @params
+        expect(response).to have_http_status(401)
+      end
     end
   end
 
   describe 'DELETE #destroy' do
+    before(:each) do
+      @list = FactoryGirl.create(:list)
+    end
 
     it 'sets the list instance variable' do
-      list = List.create(title: "title")
-      delete :destroy, id: list.id
-      expect(assigns(:list)).to eq(list)
+      delete :destroy, params: {id: @list.id}
+      expect(assigns(:list)).to eq(@list)
     end
 
     it "should destroy a list" do
-      List.create(title: 'title')
       expect(List.count).to eq(1)
-      delete :destroy, {id: List.first.id}
+      delete :destroy, params: {id: @list.id}
       expect(List.count).to eq(0)
     end
   end

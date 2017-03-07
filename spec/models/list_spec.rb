@@ -2,14 +2,10 @@ require 'rails_helper'
 
 RSpec.describe List, type: :model do
   describe 'attributes' do
-    it 'has a title' do
-      title = 'title'
-      list = List.create(title: title)
-      expect(list.title).to eq(title)
-    end
+    it { should respond_to(:title)}
   end
 
   describe 'validations' do
-    it { is_expected.to validate_presence_of(:title)}
+    it { should validate_presence_of(:title)}
   end
 end
