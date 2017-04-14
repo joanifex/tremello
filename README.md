@@ -1,24 +1,10 @@
-# README
+# Tremello
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Tremello is a Kanban board to help organize projects.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Follow these steps to get Tremello up and running:
+ * bundle exec rails db:create db:migrate db:seed
+  * This will set up the database and seed it with fake data.
+ * bundle exec rails server
+ * yarn dev_server
+  * These commands will start the servers; Tremellow will now be up and running.
